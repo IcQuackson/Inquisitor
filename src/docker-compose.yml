@@ -1,0 +1,32 @@
+
+services:
+  attacker:
+    build: ./
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    networks:
+      victim_net:
+        ipv4_address: "172.16.238.10"
+    mac_address: "02:aa:bb:cc:dd:10"
+
+  source_device:
+    build: ./
+    networks:
+      victim_net:
+        ipv4_address: "172.16.238.20"
+    mac_address: "02:42:ac:00:00:bb"
+  
+  target_device:
+    build: ./
+    networks:
+      victim_net:
+        ipv4_address: "172.16.238.30"
+    mac_address: "02:02:02:00:00:cc"
+
+networks:
+  victim_net:
+    driver: bridge
+    ipam:
+      config:
+          - subnet: "172.16.238.0/24"
