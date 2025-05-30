@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+
+from poison import sendSpoofedArp
+from arguments import validate_arguments
+
+def main():
+    validate_arguments()
+    sendSpoofedArp()
+
+
+if __name__ == "__main__":
+    main()
