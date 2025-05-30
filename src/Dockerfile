@@ -4,7 +4,8 @@ COPY ./entrypoint.sh /
 
 RUN apt-get update && \
 	apt install -y net-tools \
-	iproute2 iputils-ping
+	iproute2 iputils-ping \
+	python3
 
 RUN chmod 777 entrypoint.sh
 
