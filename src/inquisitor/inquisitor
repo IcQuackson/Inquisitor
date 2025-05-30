@@ -2,12 +2,12 @@
 
 import sys
 from poison import sendSpoofedArp
-from arguments import validate_arguments
+from arguments import parse_arguments
 
 def main():
-    args = sys.argv[1:]
-    validate_arguments(args)
-    sendSpoofedArp()
+    main_args = sys.argv[1:]
+    args = parse_arguments(main_args)
+    sendSpoofedArp(**args)
 
 
 if __name__ == "__main__":

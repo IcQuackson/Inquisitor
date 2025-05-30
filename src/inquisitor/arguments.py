@@ -33,7 +33,7 @@ def ip_is_valid(ip):
 	return False
 
 
-def validate_arguments(args):
+def parse_arguments(args):
 
 	if not arg_count_valid(args):
 		print_usage("Wrong argument count!")
@@ -49,4 +49,4 @@ def validate_arguments(args):
 	if not (ip_is_valid(args["ip_src"]) and ip_is_valid(args["ip_target"])):
 		sys.exit()
 
-	print(args)
+	return args
